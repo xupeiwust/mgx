@@ -1,0 +1,122 @@
+#! /bin/bash
+
+# ===============================================================================================================================
+# Lanceur de l'application Magix3D.
+# Son espace de déploiement dépend de sa version. Les arguments de cette application sont les mêmes dans tous les cas.
+# Ce lanceur analyse les arguments, les adapte si nécessaire selon la version demandée, puis lance la version demandée.
+# ===============================================================================================================================
+
+# Rem : -v affiche les lignes au fur et à mesure qu'elles sont exécutées.
+# set -eo pipefail commenté car "which lsb_release" retourne -1 si not found ...
+set -eo pipefail
+
+# Les versions prédéfinies :
+V_OLD=1.14.3
+V_DEV=1.16.0
+V_STD=1.14.4
+V_NEW=1.16.0
+
+# La première version déployée dans le nouvel espace de déploiement :
+V_NEW_DEP=1.15.3
+
+# Les espaces de déploiement possibles, selon la version :
+P_OLD=/ccc/products/nec
+#P_NEW=`ccc_home -Bcont001 anldist`"/cmake/"`ccc_os`"/Magix3D"
+P_NEW="/cea/BS/home/anldist/anldist/cmake/"`ccc_os`"/Magix3D"
+
+# Par défaut la version est STD :
+VERSION=$V_STD
+
+# Les arguments transmis, selon la version :
+A_OLD=
+A_NEW=
+
+# ===============================================================================================================================
+#                                                 TRAITEMENTS DES ARGUMENTS
+# ===============================================================================================================================
+
+
+for i in "$@"
+do
+	case $i in
+		--old|-old)
+		VERSION=$V_OLD;;
+		--std|-std)
+		VERSION=$V_STD;;
+		--new|-new)
+		VERSION=$V_NEW;;
+		--dev|-dev)
+		VERSION=$V_DEV;;
+		--version=*|-version=*)
+		VERSION="${i#*=}";;
+	esac
+	# Quelque soit l'argument on le conserve :
+	A_OLD="$A_OLD $i"
+	A_NEW="$A_NEW $i"
+done	#for i in "$@"
+
+
+# ===============================================================================================================================
+#                                                          FONCTIONS
+# ===============================================================================================================================
+
+# Imprime dans la sortie standard major minor patch séparés d'un espace d'un numéro de version reçu en argument.
+# Le numéro de version est dépouillé de tout 0 inutile.
+function extractMajorMinorPatch ( )
+{
+    local token="$1"
+    local major=0
+    local minor=0
+    local patch=0
+
+    if egrep '^[0-9]+\.[0-9]+\.[0-9]+' <<<"$token" >/dev/null 2>&1 ; then
+        # It has the correct syntax.
+        local n=${token//[!0-9]/ }
+        local a=(${n//\./ })
+# echo $((10#$string)) enlève tous les 0 en tête, mais en laisse un s'il n'y a que de 0
+        major=`echo $((10#${a[0]}))`
+        minor=`echo $((10#${a[1]}))`
+        patch=`echo $((10#${a[2]}))`
+    fi
+    
+    echo "$major $minor $patch"
+}	# extractMajorMinorPatch
+
+# Retourne un numéro de version type x.y.z.k apte à la comparaison versions sous forme de chaîne de caractères
+# $1  : a version string of form 1.2.3.4
+# use: (( $(ver 1.2.3.4) >= $(ver 1.2.3.3) )) && echo "yes" || echo "no"
+function comparableVersion ( )
+{
+	# ${1//./ZZZ}   : pour le paramètre $1 on remplace toutes les occurences de . par ZZZ
+	# ${1/./ZZZ}    : pour le paramètre $1 on remplace la première occurence de . par ZZZ
+    printf "%03d%03d%03d%03d" ${1//./ }
+}	# comparableVersion
+
+# Retourne un numéro de version type x.y.z pour un path à partir de $1
+function shortestVersion ( )
+{	# Surtout pas d'espace autour de =, [] ...
+	array=($(extractMajorMinorPatch $1))
+	local	major=${array[0]}
+	local	minor=${array[1]}
+	local	patch=${array[2]}
+	echo $major.$minor.$patch
+}	# shortestVersion
+
+# ===============================================================================================================================
+#                                           LANCEMENT DE L'APPLICATION DEMANDEE
+# ===============================================================================================================================
+
+VERSION=`shortestVersion "$VERSION"`
+
+# Quel espace de déploiement ?
+C_VERSION_NEW_DEP=`comparableVersion $V_NEW_DEP`
+C_VERSION=`comparableVersion $VERSION`
+if [ "$C_VERSION" -lt "$C_VERSION_NEW_DEP" ]; then
+	APP_PATH=$P_OLD/bin
+	ARGS=$A_OLD
+else
+	APP_PATH=$P_NEW/$VERSION/bin
+	ARGS=$A_NEW
+fi
+
+$APP_PATH/Magix3D $ARGS
