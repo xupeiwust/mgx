@@ -8,6 +8,7 @@
           "VtkContrib_ROOT": "$env{INSTALL_DIR}/vtkcontrib",
           "VTK_ROOT": "$env{INSTALL_DIR}/VTK-7.1.1",
           "TkUtil_ROOT": "$env{INSTALL_DIR}/tkutil",
+          "TkUtilScripting_ROOT": "$env{INSTALL_DIR}/tkutil",
           "PrefsCore_ROOT": "$env{INSTALL_DIR}/preferences",
           "PythonUtil_ROOT": "$env{INSTALL_DIR}/pythonutil",
           "OpenCASCADE_ROOT": "$env{INSTALL_DIR}/occt-V7_1_0",
