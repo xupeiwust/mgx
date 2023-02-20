@@ -16,6 +16,7 @@
           "gmds_ROOT": "$env{INSTALL_DIR}/gmds072",
           "qualifinternal_ROOT": "$env{INSTALL_DIR}/qualif",
           "GQGMDS_ROOT": "$env{INSTALL_DIR}/qqualif",
+          "QtQualif_ROOT": "$env{INSTALL_DIR}/qqualif",
           "Lima_ROOT": "$env{INSTALL_DIR}/lima",
           "gmdscea_ROOT": "$env{INSTALL_DIR}/gmdscea",
           "triton2_ROOT": "$env{INSTALL_DIR}/triton2",
