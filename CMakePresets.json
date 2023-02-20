@@ -21,7 +21,7 @@
           "gmdscea_ROOT": "$env{INSTALL_DIR}/gmdscea",
           "triton2_ROOT": "$env{INSTALL_DIR}/triton2",
           "QtUtil_ROOT": "$env{INSTALL_DIR}/qtutil",
-          "QwtChartsUtil_ROOT": "$env{INSTALL_DIR}/qwtcharts",
+          "QwtCharts_ROOT": "$env{INSTALL_DIR}/qwtcharts",
           "QtPython_ROOT": "$env{INSTALL_DIR}/qtpython",
           "QtVtk_ROOT": "$env{INSTALL_DIR}/qtvtk",
           "mesquite_ROOT": "$env{INSTALL_DIR}/mesquite-2.3.0",
