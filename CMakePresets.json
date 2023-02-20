@@ -16,7 +16,7 @@
           "GQGMDS_ROOT": "$env{INSTALL_DIR}/qqualif",
           "Lima_ROOT": "$env{INSTALL_DIR}/lima",
           "gmdscea_ROOT": "$env{INSTALL_DIR}/gmdscea",
-          "Triton2_ROOT": "$env{INSTALL_DIR}/triton2",
+          "triton2_ROOT": "$env{INSTALL_DIR}/triton2",
           "QtUtil_ROOT": "$env{INSTALL_DIR}/qtutil",
           "QwtChartsUtil_ROOT": "$env{INSTALL_DIR}/qwtcharts",
           "QtPython_ROOT": "$env{INSTALL_DIR}/qtpython",
