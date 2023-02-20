@@ -12,7 +12,7 @@
           "PythonUtil_ROOT": "$env{INSTALL_DIR}/pythonutil",
           "OpenCASCADE_ROOT": "$env{INSTALL_DIR}/occt-V7_1_0",
           "gmds_ROOT": "$env{INSTALL_DIR}/gmds072",
-          "Qualif_ROOT": "$env{INSTALL_DIR}/qualif",
+          "qualifinternal_ROOT": "$env{INSTALL_DIR}/qualif",
           "GQGMDS_ROOT": "$env{INSTALL_DIR}/qqualif",
           "Lima_ROOT": "$env{INSTALL_DIR}/lima",
           "gmdscea_ROOT": "$env{INSTALL_DIR}/gmdscea",
