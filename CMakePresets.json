@@ -12,7 +12,6 @@
           "PrefsCore_ROOT": "$env{INSTALL_DIR}/preferences",
           "PrefsQt_ROOT": "$env{INSTALL_DIR}/preferences",
           "PythonUtil_ROOT": "$env{INSTALL_DIR}/pythonutil",
-          "OpenCASCADE_ROOT": "$env{INSTALL_DIR}/occt-V7_1_0",
           "gmds_ROOT": "$env{INSTALL_DIR}/gmds072",
           "qualifinternal_ROOT": "$env{INSTALL_DIR}/qualif",
           "GQGMDS_ROOT": "$env{INSTALL_DIR}/qqualif",
@@ -24,8 +23,8 @@
           "QwtCharts_ROOT": "$env{INSTALL_DIR}/qwtcharts",
           "QtPython3_ROOT": "$env{INSTALL_DIR}/qtpython",
           "QtVtk_ROOT": "$env{INSTALL_DIR}/qtvtk",
-          "mesquite_ROOT": "$env{INSTALL_DIR}/mesquite-2.3.0",
-          "cgns_ROOT": "$env{INSTALL_DIR}/CGNS-4.3.0"
+          "OpenCASCADE_ROOT": "$env{INSTALL_DIR}/occt-V7_1_0",
+          "CMAKE_PREFIX_PATH": "$env{INSTALL_DIR}/mesquite-2.3.0;$env{INSTALL_DIR}/CGNS-4.3.0"
         }
       }
     ]
