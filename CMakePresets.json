@@ -22,7 +22,7 @@
           "triton2_ROOT": "$env{INSTALL_DIR}/triton2",
           "QtUtil_ROOT": "$env{INSTALL_DIR}/qtutil",
           "QwtCharts_ROOT": "$env{INSTALL_DIR}/qwtcharts",
-          "QtPython_ROOT": "$env{INSTALL_DIR}/qtpython",
+          "QtPython3_ROOT": "$env{INSTALL_DIR}/qtpython",
           "QtVtk_ROOT": "$env{INSTALL_DIR}/qtvtk",
           "mesquite_ROOT": "$env{INSTALL_DIR}/mesquite-2.3.0",
           "cgns_ROOT": "$env{INSTALL_DIR}/CGNS-4.3.0"
