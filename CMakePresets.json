@@ -10,6 +10,7 @@
           "TkUtil_ROOT": "$env{INSTALL_DIR}/tkutil",
           "TkUtilScripting_ROOT": "$env{INSTALL_DIR}/tkutil",
           "PrefsCore_ROOT": "$env{INSTALL_DIR}/preferences",
+          "PrefsQt_ROOT": "$env{INSTALL_DIR}/preferences",
           "PythonUtil_ROOT": "$env{INSTALL_DIR}/pythonutil",
           "OpenCASCADE_ROOT": "$env{INSTALL_DIR}/occt-V7_1_0",
           "gmds_ROOT": "$env{INSTALL_DIR}/gmds072",
