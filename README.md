@@ -1,2 +1,3 @@
 # mgx
-Software for 3D geometry preparation and mesh generation
+
+Software for 3D geometry preparation and mesh generation.
