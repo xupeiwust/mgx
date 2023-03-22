@@ -1,5 +1,5 @@
-#define T_INTERNAL_EXTENSION "not_defined"
-#define ERD_INTERNAL_EXTENSION "not_defined"
-#define USER_TEAM "undef_user_team"
-#define DOXYGEN_PATH "not_defined"
-#define DKOC_LICENCE "unavailabe"
+#define T_INTERNAL_EXTENSION @T_INTERNAL_EXTENSION@
+#define ERD_INTERNAL_EXTENSION @ERD_INTERNAL_EXTENSION@
+#define USER_TEAM @USER_TEAM@
+#define DOXYGEN_PATH @DOXYGEN_PATH@
+#define DKOC_LICENCE @DKOC_LICENCE@
