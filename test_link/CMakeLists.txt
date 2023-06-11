@@ -1,6 +1,5 @@
 #==============================================================================
 enable_testing()
-find_package(GTest REQUIRED)
 find_package(Python COMPONENTS Interpreter REQUIRED)
 
 add_test(NAME test_link
