@@ -1,7 +1,7 @@
 import sys
 import pyMagix3D as Mgx3D
 
-def test_import_mgx():
+def test_topo_box():
     ctx = Mgx3D.getStdContext()
     gm = ctx.getGeomManager ()
     tm = ctx.getTopoManager ()
@@ -10,3 +10,5 @@ def test_import_mgx():
     assert gm.getNbSurfaces()==6
     assert gm.getNbCurves()==12
     assert gm.getNbVertices()==8
+    #This last command is mandatory to clean the session for the next test
+    ctx.clearSession()
