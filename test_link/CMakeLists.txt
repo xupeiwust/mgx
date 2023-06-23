@@ -6,7 +6,7 @@ enable_testing()
 find_package(Python COMPONENTS Interpreter REQUIRED)
 #==============================================================================
 add_test(NAME test_link
-        COMMAND ${Python_EXECUTABLE} -m pytest ${CMAKE_CURRENT_SOURCE_DIR}
+        COMMAND pytest ${CMAKE_CURRENT_SOURCE_DIR}
  )
 
 set_tests_properties(test_link
