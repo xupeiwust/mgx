@@ -2,6 +2,7 @@ set (CURRENT_PACKAGE_NAME "Core")
 set (CURRENT_PACKAGE_MACRO_NAME "CORE")
 include (${CMAKE_SOURCE_DIR}/cmake/version.cmake)
 include (${CMAKE_SOURCE_DIR}/cmake/common.cmake)
+# include (${CMAKE_SOURCE_DIR}/cmake/python_binding.cmake)	# Access to Python.h		CP pour build.sh
 
 file (GLOB HEADERS protected/*/*.h)
 file (GLOB CPP_SOURCES Internal/*.cpp Geom/*.cpp Topo/*.cpp Mesh/*.cpp Structured/*.cpp Group/*.cpp SysCoord/*.cpp Smoothing/*.cpp )
@@ -19,9 +20,9 @@ add_library (Core ${CPP_SOURCES} ${HEADERS})
 
 set (CORE_OPTIONAL_LIBRARIES_LIST)
 
-find_package (PrefsCore 5 REQUIRED	)
-find_package (PythonUtil 5 REQUIRED	)
-find_package (GQGMDS 3 REQUIRED		)
+find_package (PrefsCore 6 REQUIRED	)
+find_package (PythonUtil 6 REQUIRED	)
+find_package (GQGMDS 4 REQUIRED		)
 #find_package (MachineTypes REQUIRED	)
 find_package (gmdscea 2 REQUIRED	)
 message (STATUS "------------> GMDSCEA VERSION ${gmdscea_VERSION}")
@@ -74,12 +75,16 @@ if (USE_TRITON)
 endif (USE_TRITON)
 
 include (FindPkgConfig)
-include (${CMAKE_SOURCE_DIR}/cmake/python_binding.cmake)	# Access to Python.h
+find_package (GUIToolkitsVariables)
+include (${GUIToolkitsVariables_CMAKE_DIR}/python_binding.cmake)	# Access to Python.h
 include (${CMAKE_SOURCE_DIR}/cmake/FindCgns.cmake)			# Also requires HDF5, brought by Lima
 include (${CMAKE_SOURCE_DIR}/cmake/FindMesquite.cmake)
 if (NOT TARGET Mesquite::Mesquite)
 	message (FATAL_ERROR "------------> MESQUITE NOT FOUND, FATAL ERROR")
 endif (NOT TARGET Mesquite::Mesquite)
+if (NOT TARGET cgns::cgns)
+	message (FATAL_ERROR "------------> CGNS NOT FOUND, FATAL ERROR")
+endif (NOT TARGET cgns::cgns)
 pkg_check_modules (gts REQUIRED gts)						# GTS (GNU Triangulated Surface Library)
 pkg_get_variable (GTS_INC_DIR gts includedir)
 pkg_get_variable (GTS_LIB_DIR gts libdir)

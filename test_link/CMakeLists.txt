@@ -15,6 +15,6 @@ add_test(NAME test_link
  )
 
 set_tests_properties(test_link
-	PROPERTIES ENVIRONMENT "PYTHONPATH=${PYTHONPATH}")
+	PROPERTIES ENVIRONMENT "PYTHONPATH=$ENV{PYTHONPATH}")
 
 #==============================================================================

@@ -1,9 +1,10 @@
 set (CURRENT_PACKAGE_NAME "Magix3D_exe")
 
+find_package (GUIToolkitsVariables)
 include (${CMAKE_SOURCE_DIR}/cmake/version.cmake)
 include (${CMAKE_SOURCE_DIR}/cmake/common.cmake)
-include (${CMAKE_SOURCE_DIR}/cmake/python_binding.cmake)
-find_package (Qt5Core)	# Beurk
+include (${GUIToolkitsVariables_CMAKE_DIR}/python_binding.cmake)
+find_package(Qt5 COMPONENTS Core NO_CMAKE_SYSTEM_PATH)
 set (TARGET_NAME Magix3D)
 set (MAGIX3D_EXE ${TARGET_NAME}-${MAGIX3D_VERSION})
 add_executable (${MAGIX3D_EXE} main.cpp)
@@ -43,12 +44,8 @@ install (
    )
 
 # Le script de lancement de Magix3D :
-if (NOT USE_PYTHON_3)
-	find_package (QtPython 5 REQUIRED)
-else (NOT USE_PYTHON_3)
-	find_package (QtPython3 5 REQUIRED)
-	set (QtPython_RUNTIME_DIR "${QtPython3_RUNTIME_DIR}")
-endif (NOT USE_PYTHON_3)
+find_package (QtPython3 6 REQUIRED)
+set (QtPython_RUNTIME_DIR "${QtPython3_RUNTIME_DIR}")
 #find_package (LimaScripting)	# Faut il ajouter le PATH à Lima si installé ailleurs ?
 set (MAGIX3D_BINDING_INSTALL_DIR ${PYTHON_BINDING_DIR})
 find_package (VTK REQUIRED COMPONENTS vtksys )

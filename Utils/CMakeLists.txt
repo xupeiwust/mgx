@@ -3,13 +3,12 @@ set (CURRENT_PACKAGE_MACRO_NAME "UTILS")
 include (${CMAKE_SOURCE_DIR}/cmake/version.cmake)
 include (${CMAKE_SOURCE_DIR}/cmake/common.cmake)
 
-find_package (TkUtil 5 REQUIRED)
+find_package (TkUtil 6 REQUIRED)
 
 file (GLOB HEADERS protected/Utils/*.h)
 file (GLOB CPP_SOURCES *.cpp)
 
-# On ajoute les en-têtes aux sources. C'est utile pour cmake dans certains cas,
-# par exemple lorsqu'ils doivent être pré-processés (moc, ...).
+# On ajoute les en-têtes aux sources. C'est utile pour cmake dans certains cas, par exemple lorsqu'ils doivent être pré-processés (moc, ...).
 add_library (Utils ${CPP_SOURCES} ${HEADERS})
 set (ALL_TARGETS Utils)
 set_property (TARGET Utils PROPERTY VERSION ${MAGIX3D_VERSION})

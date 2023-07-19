@@ -5,8 +5,8 @@
 # => include version.cmake avant celui-ci.
 #
 
-include (${CMAKE_SOURCE_DIR}/cmake/organization.cmake)
-
+find_package (GUIToolkitsVariables)
+include (${GUIToolkitsVariables_CMAKE_DIR}/common.cmake)
 
 # Compilation :
 add_definitions (-DMAGIX3D_VERSION="${MAGIX3D_VERSION}")

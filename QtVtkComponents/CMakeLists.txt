@@ -4,8 +4,8 @@ set (CURRENT_PACKAGE_MACRO_NAME "QT_VTK_COMPONENTS")
 include (${CMAKE_SOURCE_DIR}/cmake/version.cmake)
 include (${CMAKE_SOURCE_DIR}/cmake/common.cmake)
 
-find_package (QtVtk 7)
-find_package (ExperimentalRoom 7)
+find_package (QtVtk 8)
+find_package (ExperimentalRoom 8)
 
 if (VTK_9)
 	set (VTK_REQUIRED_PACKAGES RenderingLOD)
@@ -28,10 +28,7 @@ target_compile_options (QtVtkComponents PRIVATE -DMAGIX3D_VERSION="${MAGIX3D_VER
 target_link_libraries (QtVtkComponents PUBLIC QtComponents VtkComponents QtVtk::QtVtk)
 # TODO Clean
 if (ExperimentalRoom_FOUND)
-#	target_compile_options (QtVtkComponents PUBLIC -DUSE_EXPERIMENTAL_ROOM)	# Déjà fourni dans QtComponents
 	target_link_libraries (QtVtkComponents PUBLIC ExperimentalRoom::ExperimentalRoom)
-	find_package (ExperimentalRoomTExtension 7 REQUIRED)
-	target_link_libraries (QtVtkComponents PUBLIC ExperimentalRoomTExtension::ExperimentalRoomTExtension)
 endif (ExperimentalRoom_FOUND)
 
 target_compile_options (QtVtkComponents PRIVATE ${SHARED_CFLAGS})	# Requested by Qt ...

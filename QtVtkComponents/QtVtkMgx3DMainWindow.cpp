@@ -28,7 +28,7 @@
 #include <ExperimentalRoom/QtExpRoomFileDialog.h>
 #include <ExperimentalRoom/ExperimentalRoomDistribution.h>
 // TODO Clean
-#include <ExperimentalRoomTExtension/TRaysIO.h>
+//#include <ExperimentalRoomTExtension/TRaysIO.h>
 // End todo
 #include <ExperimentalRoom/VisRadCsvIO.h>
 #include <ExperimentalRoom/ERDRaysIO.h>
@@ -475,8 +475,10 @@ void QtVtkMgx3DMainWindow::saveAsRaysCallback ( )
 	File	file	(_experimentalRoomPanel->getExperimentalRoom ( ).getRaysFilePath ( ));
 	string	dir	= file.getPath ( ).getFullFileName ( );
 	vector<QtExpRoomFileDialog::Format>	formats;
+/*	TODO
 	vector<string>	tExt		= TRaysIO::getFileExtensions ( );
 	formats.push_back (QtExpRoomFileDialog::Format ("T", tExt, true, true));
+*/
 	vector<string>	erdExt		= ERDRaysIO::getFileExtensions ( );
 	formats.push_back (QtExpRoomFileDialog::Format ("Experimental Room Description", erdExt, true, true));
 	static bool	hiddenRays	= false;
@@ -500,7 +502,7 @@ void QtVtkMgx3DMainWindow::saveAsRaysCallback ( )
 	file.setFullFileName (fileList [0].toStdString ( ));
 	hiddenRays	= !dialog.processVisiblesOnly ( );
 
-
+/* TODO
 	if ((file.getExtension ( ) == T_INTERNAL_EXTENSION) || ((true == dialog.selectedNameFilter ( ).startsWith ("T ")) && ((false == file.exists ( )) || (ExperimentalRoomTIOManager::isTFile (file.getFullFileName ( ))))))
 	{
 		ioManager	= dynamic_cast<ExperimentalRoomTIOManager*>(_experimentalRoomPanel->getRaysIOManager ( ));
@@ -511,7 +513,7 @@ void QtVtkMgx3DMainWindow::saveAsRaysCallback ( )
 		}	// if (0 == ioManager)
 	}
 	else
-
+*/
 	if ((file.getExtension ( ) == "erd") || ((true == dialog.selectedNameFilter ( ).startsWith ("Experimental Room Description")) && ((false == file.exists ( )) || (ExperimentalRoomERDIOManager::isERDFile (file.getFullFileName ( ))))))
 	{
 		ioManager	= dynamic_cast<ExperimentalRoomERDIOManager*>(_experimentalRoomPanel->getRaysIOManager ( ));
@@ -579,8 +581,10 @@ défini (Menu Chambre expérimentale).", Charset::UTF_8));
 	}
 
 	vector<QtExpRoomFileDialog::Format>	formats;
+/* TODO
 	vector<string>	tExt		= TRaysIO::getFileExtensions ( );
 	formats.push_back (QtExpRoomFileDialog::Format ("T", tExt, false, true));
+*/
 	vector<string>	erdExt		= ERDRaysIO::getFileExtensions ( );
 	formats.push_back (QtExpRoomFileDialog::Format ("Experimental Room Description", erdExt, false, true));
 	vector<string>	visradExt	    = VisRadCsvReader::getFileExtensions ( );
@@ -621,12 +625,14 @@ défini (Menu Chambre expérimentale).", Charset::UTF_8));
 		room	    = new ExperimentalRoom (file.getFileName ( ), ExperimentalRoom::TARGET);
 		ioManager->getReader ( ).loadRoom (file.getFullFileName ( ), *room, ExperimentRay::LASER, ExperimentRay::CARTESIAN_EXP_ROOM);
 	}	// if (file.getExtension ( ) == "csv")
+/* TODO
 	else if ((file.getExtension ( ) == T_INTERNAL_EXTENSION) || ((file.getExtension ( ) == "xml") && (ExperimentalRoomTIOManager::isTFile (file.getFullFileName ( )))))
 	{
 		ioManager	= new ExperimentalRoomTIOManager ( );
 		room	    = new ExperimentalRoom (file.getFileName ( ), ExperimentalRoom::TARGET);
 		ioManager->getReader ( ).loadRoom (file.getFullFileName ( ), *room, ExperimentRay::LASER, ExperimentRay::CARTESIAN_EXP_ROOM);
 	}
+*/
 	else if (file.getExtension ( ) == "vrw")
 	{
 		ioManager	                    = new VisRadVrwIOManager ( );
@@ -705,8 +711,10 @@ void QtVtkMgx3DMainWindow::saveAsDiagsCallback ( )
 	File	file	(_experimentalRoomPanel->getExperimentalRoom ( ).getDiagsFilePath ( ));
 	string	dir	= file.getPath ( ).getFullFileName ( );
 	vector<QtExpRoomFileDialog::Format> formats;
+/* TODO
 	vector<string>	tExt		= TRaysIO::getFileExtensions ( );
 	formats.push_back (QtExpRoomFileDialog::Format ("T", tExt, true, true));
+*/
 	vector<string>	erdExt		= ERDRaysIO::getFileExtensions ( );
 	formats.push_back (QtExpRoomFileDialog::Format ("Experimental Room Description", erdExt, true, true));
 	const Charset::CHARSET	charset	=
@@ -723,6 +731,7 @@ void QtVtkMgx3DMainWindow::saveAsDiagsCallback ( )
 	QStringList					fileList	= dialog.selectedFiles ( );
 	file.setFullFileName (fileList [0].toStdString ( ));
 
+/* TODO
 	if ((file.getExtension ( ) == T_INTERNAL_EXTENSION) || ((true == dialog.selectedNameFilter ( ).startsWith ("T ")) && ((false == file.exists ( )) || (ExperimentalRoomTIOManager::isTFile (file.getFullFileName ( ))))))
 	{
 		ioManager	= dynamic_cast<ExperimentalRoomTIOManager*>(_experimentalRoomPanel->getDiagsIOManager ( ));
@@ -732,7 +741,9 @@ void QtVtkMgx3DMainWindow::saveAsDiagsCallback ( )
 			_experimentalRoomPanel->setDiagsIOManager (ioManager);
 		}	// if (0 == ioManager)
 	}
-	else if ((file.getExtension ( ) == "erd") || ((true == dialog.selectedNameFilter ( ).startsWith ("Experimental Room Description")) && ((false == file.exists ( )) || (ExperimentalRoomERDIOManager::isERDFile (file.getFullFileName ( ))))))
+	else
+*/
+	if ((file.getExtension ( ) == "erd") || ((true == dialog.selectedNameFilter ( ).startsWith ("Experimental Room Description")) && ((false == file.exists ( )) || (ExperimentalRoomERDIOManager::isERDFile (file.getFullFileName ( ))))))
 	{
 		ioManager	= dynamic_cast<ExperimentalRoomERDIOManager*>(_experimentalRoomPanel->getDiagsIOManager ( ));
 		if (0 == ioManager)
@@ -780,8 +791,10 @@ défini (Menu Chambre expérimentale).", Charset::UTF_8));
 	QString			lastDir (dir.c_str ( ));
 	static QString	lastFilter ("");
 	vector<QtExpRoomFileDialog::Format>	formats;
+/* TODO
 	vector<string>	tExt		= TRaysIO::getFileExtensions ( );
 	formats.push_back (QtExpRoomFileDialog::Format ("T", tExt, false, true));
+*/
 	vector<string>	erdExt		= ERDRaysIO::getFileExtensions ( );
 	formats.push_back (QtExpRoomFileDialog::Format ("Experimental Room Description", erdExt, false, true));
 	QtExpRoomFileDialog	dialog (this, getAppTitle ( ).c_str ( ), ExperimentRay::DIAGNOSIS, QFileDialog::AcceptOpen, lastDir.toStdString ( ), formats);
@@ -820,6 +833,7 @@ défini (Menu Chambre expérimentale).", Charset::UTF_8));
 		diags2.clear ( );	// not mandatory
 		delete room;	room	= 0;
 	}	// if ((file.getExtension ( ) == "erd") || ...
+/* TODO
 	else if ((file.getExtension ( ) == T_INTERNAL_EXTENSION) || ((file.getExtension ( ) == "xml") && (ExperimentalRoomTIOManager::isTFile (file.getFullFileName ( )))))
 	{
 		ExperimentalRoomTIOManager*	ioManager	= new ExperimentalRoomTIOManager ( );
@@ -840,6 +854,7 @@ défini (Menu Chambre expérimentale).", Charset::UTF_8));
 		diags2.clear ( );	// not mandatory
 		delete room;	room	= 0;
 	}
+*/
 	else
 		throw Exception ("Format de fichier non reconnu");
 }	// QtVtkMgx3DMainWindow::loadDiags

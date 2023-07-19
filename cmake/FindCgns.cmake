@@ -9,7 +9,7 @@
 #  CGNS_LIBRARIES - additional libraries
 #  CGNS_ROOT_DIR - root dir
 
-
+set (CGNS_FOUND FALSE)
 # message (STATUS "CGNS_INCLUDE_DIR: '${CGNS_INCLUDE_DIR}'")
 
 message (STATUS "=====================================> CGNS_DIR: ${CGNS_DIR} Cgns_ROOT=${Cgns_ROOT}")
@@ -62,14 +62,19 @@ mark_as_advanced (
 )
 
 set (CGNS_TARGET "cgns::cgns")
-
-if (EXTENSION STREQUAL ".a")
-	add_library (${CGNS_TARGET} STATIC IMPORTED)
-else()
-	add_library (${CGNS_TARGET} SHARED IMPORTED)
-endif ()
-
+if (NOT TARGET cgns::cgns)
+	if (EXTENSION STREQUAL ".a")
+		add_library (${CGNS_TARGET} STATIC IMPORTED)
+	else()
+		add_library (${CGNS_TARGET} SHARED IMPORTED)
+	endif ()
+endif ( )
 set_target_properties (cgns::cgns PROPERTIES
 		INTERFACE_INCLUDE_DIRECTORIES ${CGNS_INCLUDE_DIR}
 		IMPORTED_LOCATION ${CGNS_LIBRARIES}
 	)
+
+message (STATUS "CGNS_INCLUDE_DIR=${CGNS_INCLUDE_DIR} CGNS_LIBRARIES=${CGNS_LIBRARIES}")
+if (CGNS_INCLUDE_DIR AND CGNS_LIBRARIES)
+	set (CGNS_FOUND TRUE)
+endif ( )

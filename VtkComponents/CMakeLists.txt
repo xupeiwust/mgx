@@ -4,13 +4,13 @@ set (CURRENT_PACKAGE_MACRO_NAME "VTK_COMPONENTS")
 include (${CMAKE_SOURCE_DIR}/cmake/version.cmake)
 include (${CMAKE_SOURCE_DIR}/cmake/common.cmake)
 
-find_package (VtkContrib 4 REQUIRED)
+find_package (VtkContrib 5 REQUIRED)
 
-file (GLOB HEADERS protected/VtkComponents/*.h)
-file (GLOB CPP_SOURCES *.cpp)
+file (GLOB HEADERS protected/VtkComponents/vtkECMFactory.h protected/VtkComponents/vtkECMXOpenGLRenderWindow.h protected/VtkComponents/vtkECMXOpenGLRenderWindow.h
+                   protected/VtkComponents/vtkLockableRenderWindow.h protected/VtkComponents/vtkUnstructuredGridRefinementFilter.h)
+file (GLOB CPP_SOURCES vtkECMFactory.cpp vtkECMXOpenGLRenderWindow.cpp vtkECMXOpenGLRenderWindow.cpp vtkLockableRenderWindow.cpp vtkUnstructuredGridRefinementFilter.cpp)
 
-# On ajoute les en-têtes aux sources. C'est utile pour cmake dans certains cas,
-# par exemple lorsqu'ils doivent être pré-processés (moc, ...).
+# On ajoute les en-têtes aux sources. C'est utile pour cmake dans certains cas, par exemple lorsqu'ils doivent être pré-processés (moc, ...).
 add_library (VtkComponents ${CPP_SOURCES} ${HEADERS})
 set (ALL_TARGETS VtkComponents)
 set_property (TARGET VtkComponents PROPERTY VERSION ${MAGIX3D_VERSION})

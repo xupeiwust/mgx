@@ -9,10 +9,7 @@
 #  MESQUITE_LIBRARIES - additional libraries
 #  MESQUITE_ROOT_DIR - root dir
 
-
-# message (STATUS "MESQUITE_INCLUDE_DIR: '${MESQUITE_INCLUDE_DIR}'")
-
-message (STATUS "=====================================> MESQUITE_DIR: ${MESQUITE_DIR} Mesquite_ROOT=${Mesquite_ROOT}")
+set (MESQUITE_FOUND FALSE)
 
 if (MESQUITE_DIR)
 	find_path (MESQUITE_INCLUDE_DIR Mesquite.hpp PATHS ${MESQUITE_DIR}/include)
@@ -22,8 +19,6 @@ else()
 	find_path (MESQUITE_INCLUDE_DIR Mesquite.hpp)
 endif()
 	
-# message( "MESQUITE_INCLUDE_DIR: '${MESQUITE_INCLUDE_DIR}'" )
-
 set (MESQUITE_INCLUDE_DIRS ${MESQUITE_INCLUDE_DIR} )
 
 if (MESQUITE_DIR)
@@ -57,14 +52,21 @@ mark_as_advanced (
 )
 
 set (MESQUITE_TARGET "Mesquite::Mesquite")
-
-if (EXTENSION STREQUAL ".a")
-	add_library (${MESQUITE_TARGET} STATIC IMPORTED)
-else()
-	add_library (${MESQUITE_TARGET} SHARED IMPORTED)
-endif ()
+if (NOT TARGET Mesquite::Mesquite)
+	if (EXTENSION STREQUAL ".a")
+		add_library (${MESQUITE_TARGET} STATIC IMPORTED)
+	else()
+		add_library (${MESQUITE_TARGET} SHARED IMPORTED)
+	endif ()
+endif ( )
 
 set_target_properties (Mesquite::Mesquite PROPERTIES
 		INTERFACE_INCLUDE_DIRECTORIES ${MESQUITE_INCLUDE_DIR}
 		IMPORTED_LOCATION ${MESQUITE_LIBRARIES}
 	)
+
+#message (STATUS "MESQUITE_INCLUDE_DIR=${MESQUITE_INCLUDE_DIR} MESQUITE_LIBRARIES=${MESQUITE_LIBRARIES}")
+if (MESQUITE_INCLUDE_DIR AND MESQUITE_LIBRARIES)
+	set (MESQUITE_FOUND TRUE)
+endif ( )
+	
